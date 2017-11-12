@@ -3,13 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>myblog</artifactId>
+        <artifactId>common</artifactId>
         <groupId>com.suyu</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>frontend</artifactId>
+    <groupId>com.suyu</groupId>
+    <artifactId>mybatits</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
