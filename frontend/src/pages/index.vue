@@ -1,8 +1,10 @@
 <template>
+    <div>
+    <vheader :activeIndex="1"></vheader>
     <div class="center">
       <!-- 页面左侧模块-->
       <el-container>
-        <el-aside width="260px">
+        <el-aside width="230px">
           <div style="padding-bottom: 20px;">
             <el-tag type="success">
               <span style="font-weight:bold;">个人资料</span>
@@ -150,16 +152,19 @@
         </el-main>
       </el-container>
     </div>
+    </div>
 </template>
 
 <script type="text/ecmascript-6">
+    import vheader from '@/pages/head'
     export default {
       name: 'Test',
       data () {
         return {
           msg: 'Welcome to Your Vue.js App'
         }
-      }
+      },
+      components: { vheader }
     }
 </script>
 
@@ -167,9 +172,12 @@
   h1 {
     color: red;
   }
+  .el-aside{
+     width: 15%;
+  }
   .center {
-    margin-left: 5%;
-    margin-right:5%;
+    margin-left: 15%;
+    margin-right:15%;
     margin-top: 20px;
     background-color: #fff;
   }
@@ -228,6 +236,7 @@
     width: 96%;
     margin-left: 2%;
     margin-top: 12px;
+    height: 12%;
   }
   .blog-title{
     color: #000;
@@ -259,6 +268,7 @@
   .blog-detail{
     width: 100%;
     height: 30px;
+    margin-top: 5%;
   }
   .blog-data-art{
     float: right;

@@ -4,6 +4,8 @@ import Index from '@/pages/index'
 import App from '@/App'
 import Head from '@/pages/head'
 import Login from '@/pages/login'
+import Regist from '@/pages/regist'
+import Blog from '@/pages/blog'
 
 Vue.use(Router)
 
@@ -27,6 +29,16 @@ export default new Router({
           path: '/login',
           component: Login,
           name: 'login'
+        },
+        {
+          path: '/register',
+          component: Regist,
+          name: 'register'
+        },
+        {
+          path: '/blog',
+          component: Blog,
+          name: 'blog'
         }
       ]
     }

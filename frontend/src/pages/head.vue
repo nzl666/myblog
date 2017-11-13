@@ -9,7 +9,7 @@
         text-color="#fff"
         active-text-color="#ffd04b">
         <el-menu-item class="mar-lef" index="1">首页</el-menu-item>
-        <el-menu-item class="mar-lef" index="2">xxx</el-menu-item>
+        <el-menu-item class="mar-lef" index="2">文章</el-menu-item>
         <el-menu-item class="mar-lef" index="3">留言</el-menu-item>
         <div class="login-regist">
           <div v-if="false">
