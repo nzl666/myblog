@@ -6,10 +6,10 @@
       </div>
       <el-form ref="form" :model="user" label-width="80px">
         <el-form-item label="账号">
-          <el-input v-model="user.account" placeholder="输入账号"></el-input>
+            <el-input v-model="user.account" placeholder="输入账号"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="user.password"placeholder="输入密码" ></el-input>
+            <el-input type="password" v-model="user.password"placeholder="输入密码" ></el-input>
         </el-form-item>
         <el-form-item>
           <el-checkbox v-model="checked">自动登录</el-checkbox>
@@ -29,8 +29,8 @@
     data () {
       return {
         user: {
-          account: '',
-          password: ''
+          account: 'admin',
+          password: '123456'
         }
       }
     }
