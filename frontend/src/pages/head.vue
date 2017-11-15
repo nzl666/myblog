@@ -55,7 +55,6 @@
     border-radius: 17px;
   }
   #head {
-    margin-top: -10px;
   }
   mybtn {
     width: 6%;
@@ -63,7 +62,7 @@
     float: left;
   }
   .el-menu--horizontal .el-menu-item {
-    margin-left: 10%;
+    margin-left: 3%;
   }
   body{
     margin: 0px;

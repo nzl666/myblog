@@ -4,7 +4,7 @@
     <div class="center">
       <!-- 页面左侧模块-->
       <el-container>
-        <el-aside width="230px">
+        <el-aside width="260px">
           <div style="padding-bottom: 20px;">
             <el-tag type="success">
               <span style="font-weight:bold;">个人资料</span>
@@ -47,15 +47,12 @@
             </el-tag>
           </div>
           <div class="my-info" style="text-align: left;border: none">
-            <div class="art-data">
-             <a href="#">Java</a><span style="margin-left: 15px">(<span>26</span></span>)
-            </div>
-            <div class="art-data">
-             <a href="#">springBoot</a><span style="margin-left: 15px">(<span>86</span></span>)
-            </div>
-            <div class="art-data">
-              <a href="#">vue.js</a><span style="margin-left: 15px">(<span>66</span></span>)
-            </div>
+            <el-tag
+              v-for="tag in tags"
+              :key="tag.name"
+              :type="tag.type">
+              {{tag.name}}
+            </el-tag>
           </div>
           <div class="center-spance"></div>
           <div>
@@ -161,7 +158,13 @@
       name: 'Test',
       data () {
         return {
-          msg: 'Welcome to Your Vue.js App'
+          tags: [
+            { name: '标签一', type: '' },
+            { name: '标签二', type: 'success' },
+            { name: '标签三', type: 'info' },
+            { name: '标签四', type: 'warning' },
+            { name: '标签五', type: 'danger' }
+          ]
         }
       },
       components: { vheader }
@@ -258,7 +261,7 @@
     width: 20px;
     height: 20px;
     border-radius: 7px;
-    background-color: #67c23a;;
+    background-color: #67c23a;
     font-size: 12px;
     text-align: center;
     float: left;
@@ -268,7 +271,7 @@
   .blog-detail{
     width: 100%;
     height: 30px;
-    margin-top: 5%;
+    margin-top: 40px;
   }
   .blog-data-art{
     float: right;
@@ -278,5 +281,11 @@
   .block{
     margin-top: 30px;
     float: right;
+  }
+  .el-tag{
+    width: 100%;
+    text-align: left;
+    margin-top: 5px;
+    cursor: pointer;
   }
 </style>

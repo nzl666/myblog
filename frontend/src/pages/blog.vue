@@ -86,10 +86,46 @@
         </div>
       </div>
     </div>
-    <div class="">
+    <div class="allcomnucate">
       <img class="head-img-co" src="http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"/>
-      <span style="margin-top: 20px"><a style="margin-top: 20px" href="#">苏雨丶</a></span>
+      <ul class="allcomnucate-detail">
+        <div>
+          <li>
+            <span style=""><a style="margin-top: 20px" href="#">苏雨丶</a></span>
+            <span class="content-time">2017-11-15 10:28:35</span>
+            <span class="time" style="margin-right: 40px;font-size: 16px;">#2楼</span>
+          </li>
+        </div>
+        <li class="content">
+          xxxx
+        </li>
+        <li style="margin-top: 5px; font-size: 14px;">
+          <a href="#" >回复</a>
+        </li>
+      </ul>
       <div class="user-comment-box">
+
+      </div>
+    </div>
+    <div class="allcomnucate">
+      <img class="head-img-co" src="http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"/>
+      <ul class="allcomnucate-detail">
+        <div>
+          <li>
+            <span style=""><a style="margin-top: 20px" href="#">苏雨丶</a></span>
+            <span class="content-time">2017-11-15 10:28:35</span>
+            <span class="time" style="margin-right: 40px;font-size: 16px;">#1楼</span>
+          </li>
+        </div>
+        <li class="content">
+          xxxx
+        </li>
+        <li style="margin-top: 5px; font-size: 14px;">
+          <a href="#" >回复</a>
+        </li>
+      </ul>
+      <div class="user-comment-box">
+
       </div>
     </div>
   </div>
@@ -159,7 +195,7 @@
   }
   .user-comment{
     padding: 30px;
-    border-bottom: 1px solid #409EFF;
+    border-bottom: 1px solid #663300;
     padding-bottom: 50px;
   }
   .user-comment-box{
@@ -177,5 +213,21 @@
     height: 35px;
     text-align: center;
     background-color: #67c23a;
+  }
+  .allcomnucate{
+    margin-top: 10px;
+    padding-left: 70px;
+    border-bottom: 1px dashed #663300;
+  }
+  .allcomnucate-detail{
+    margin-left: 10px;
+  }
+  li {list-style-type:none;}
+  .content {
+    margin-top: 20px;
+  }
+  .content-time{
+    color: #bbb;
+    margin-left: 20px;
   }
 </style>
