@@ -8,13 +8,15 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <el-menu-item class="mar-lef" index="1">首页</el-menu-item>
-        <el-menu-item class="mar-lef" index="2">文章</el-menu-item>
+        <el-menu-item class="mar-lef" index="/index">首页</el-menu-item>
+        <el-menu-item class="mar-lef" index="/blog">文章</el-menu-item>
         <el-menu-item class="mar-lef" index="3">留言</el-menu-item>
         <div class="login-regist">
           <div v-if="islogin">
-          <a href="#">登录</a>
-            <span style="margin-left: 20px;"><a href="#">注册</a></span>
+            <router-link :to="{ name: 'login' }">登录</router-link>
+            <router-link :to="{ name: 'register' }">
+            <span style="margin-left: 20px;">注册</span>
+            </router-link>
            </div>
           <div v-else="islogin">
             <img class="head-img" src="http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"/>

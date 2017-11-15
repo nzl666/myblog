@@ -1,10 +1,12 @@
 <template>
+  <div>
+  <vheader :activeIndex="2"></vheader>
   <div class="blog-main">
     <div class="blog-title">
          <h2 class="csdn_top">面向对象的思想</h2>
       <div class="artical_tag">
-        <el-tag>Java</el-tag>
-        <el-tag type="success">Springboot</el-tag>
+        <el-tag class="tag-kind">Java</el-tag>
+        <el-tag class="tag-kind">Springboot</el-tag>
         <div>
           <span class="time" style="margin-right: 5%">
              <i class="el-icon-time" style="font-size: 15px;"></i>
@@ -86,35 +88,14 @@
         </div>
       </div>
     </div>
-    <div class="allcomnucate">
-      <img class="head-img-co" src="http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"/>
+    <div class="allcomnucate" v-for="c in comunates">
+      <img class="head-img-co" :src=" c.headimg "/>
       <ul class="allcomnucate-detail">
         <div>
           <li>
-            <span style=""><a style="margin-top: 20px" href="#">苏雨丶</a></span>
-            <span class="content-time">2017-11-15 10:28:35</span>
-            <span class="time" style="margin-right: 40px;font-size: 16px;">#2楼</span>
-          </li>
-        </div>
-        <li class="content">
-          xxxx
-        </li>
-        <li style="margin-top: 5px; font-size: 14px;">
-          <a href="#" >回复</a>
-        </li>
-      </ul>
-      <div class="user-comment-box">
-
-      </div>
-    </div>
-    <div class="allcomnucate">
-      <img class="head-img-co" src="http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"/>
-      <ul class="allcomnucate-detail">
-        <div>
-          <li>
-            <span style=""><a style="margin-top: 20px" href="#">苏雨丶</a></span>
-            <span class="content-time">2017-11-15 10:28:35</span>
-            <span class="time" style="margin-right: 40px;font-size: 16px;">#1楼</span>
+            <router-link :to="{ name: 'login' }"><span style="">{{c.uname}}</span></router-link>
+            <span class="content-time">{{c.ctime}}</span>
+            <span class="time" style="margin-right: 40px;font-size: 16px;">#{{c.floor}}楼</span>
           </li>
         </div>
         <li class="content">
@@ -129,16 +110,24 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
+  import vheader from '@/pages/head'
   export default {
     name: 'HelloWorld',
     data () {
       return {
-
+        comunates: [
+          { uid: 1, ctime: '2017-11-15 10:28:35', uname: '苏雨丶', headimg: 'http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"', floor: 1 },
+          { uid: 2, ctime: '2017-11-15 10:28:35', uname: '苏雨°', headimg: 'http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"', floor: 2 },
+          { uid: 3, ctime: '2017-11-15 10:28:35', uname: '苏雨丶', headimg: 'http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"', floor: 3 },
+          { uid: 4, ctime: '2017-11-15 10:28:35', uname: '苏雨°', headimg: 'http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"', floor: 4 }
+        ]
       }
-    }
+    },
+    components: { vheader }
   }
 </script>
 
@@ -229,5 +218,8 @@
   .content-time{
     color: #bbb;
     margin-left: 20px;
+  }
+  .tag-kind {
+
   }
 </style>

@@ -47,7 +47,7 @@
             </el-tag>
           </div>
           <div class="my-info" style="text-align: left;border: none">
-            <el-tag
+            <el-tag class="tip-kind"
               v-for="tag in tags"
               :key="tag.name"
               :type="tag.type"
@@ -83,60 +83,25 @@
            <div class="top-main">
 
            </div>
-          <div class="blog-art-box">
-            <div class="blog-title"><div class="tip-blog">新</div><a href="#">删除github项目中已经存在的某个文件</a></div>
-            <div class="blog-introduction"><span class="intro-font">删除github项目中已经存在的某个文件...</span></div>
-            <div class="blog-detail">
-               <span class="blog-data-art">
-                 <i class="el-icon-edit-outline" style="font-size: 15px"></i>
-                 <label>评论</label><span>(</span><span>666</span><span>)</span>
-              </span>
-              <span class="blog-data-art">
-                <i class="el-icon-view" style="font-size: 15px;"></i>
-                 <label>阅读</label><span>(</span><span>6666</span><span>)</span>
-              </span>
-
-              <span class="blog-data-art">
-                  <i class="el-icon-time" style="font-size: 15px;"></i>
-                <span>2017-11-12 21:12</span>
-              </span>
+          <div class="blog-art-box" v-for="b in blogs">
+            <div class="blog-title">
+              <div class="tip-blog">{{b.status}}</div>
+              <router-link :to="{ name: 'blog' }">{{b.title}}</router-link>
             </div>
-          </div>
-          <div class="blog-art-box">
-            <div class="blog-title"><div class="tip-blog">热</div><a href="#">删除github项目中已经存在的某个文件</a></div>
-            <div class="blog-introduction"><span class="intro-font">删除github项目中已经存在的某个文件...是否撒大声地发生的</span></div>
+            <div class="blog-introduction"><span class="intro-font">{{b.tip}}</span></div>
             <div class="blog-detail">
                <span class="blog-data-art">
                  <i class="el-icon-edit-outline" style="font-size: 15px"></i>
-                 <label>评论</label><span>(</span><span>666</span><span>)</span>
+                 <label>评论</label><span>(</span><span>{{b.comucount}}</span><span>)</span>
               </span>
               <span class="blog-data-art">
                 <i class="el-icon-view" style="font-size: 15px;"></i>
-                 <label>阅读</label><span>(</span><span>6666</span><span>)</span>
+                 <label>阅读</label><span>(</span><span>{{b.readcount}}</span><span>)</span>
               </span>
 
               <span class="blog-data-art">
                   <i class="el-icon-time" style="font-size: 15px;"></i>
-                <span>2017-11-12 21:12</span>
-              </span>
-            </div>
-          </div>
-          <div class="blog-art-box">
-            <div class="blog-title"><div class="tip-blog">新</div><a href="#">删除github项目中已经存在的某个文件</a></div>
-            <div class="blog-introduction"><span class="intro-font">删除github项目中已经存在的某个文件...</span></div>
-            <div class="blog-detail">
-               <span class="blog-data-art">
-                 <i class="el-icon-edit-outline" style="font-size: 15px"></i>
-                 <label>评论</label><span>(</span><span>666</span><span>)</span>
-              </span>
-              <span class="blog-data-art">
-                <i class="el-icon-view" style="font-size: 15px;"></i>
-                 <label>阅读</label><span>(</span><span>6666</span><span>)</span>
-              </span>
-
-              <span class="blog-data-art">
-                  <i class="el-icon-time" style="font-size: 15px;"></i>
-                <span>2017-11-12 21:12</span>
+                <span>{{b.pubtime}}</span>
               </span>
             </div>
           </div>
@@ -165,6 +130,13 @@
             { name: '标签三', type: 'info' },
             { name: '标签四', type: 'warning' },
             { name: '标签五', type: 'danger' }
+          ],
+          blogs: [
+            { title: '删除github项目中已经存在的某个文件', status: '新', id: '1', tip: '删除github项目中已经存在的某个文件...', readcount: 666, pubtime: '2017-11-15 10:25 :30', comucount: 99 },
+            { title: '删除github项目中已经存在的某个文件', status: '热', id: '2', tip: '删除github项目中已经存在的某个文件...', readcount: 333, pubtime: '2017-11-15 10:25 :30', comucount: 666 },
+            { title: '删除github项目中已经存在的某个文件', status: '新', id: '3', tip: '删除github项目中已经存在的某个文件...', readcount: 999, pubtime: '2017-11-15 10:25 :30', comucount: 88 },
+            { title: '删除github项目中已经存在的某个文件', status: '热', id: '4', tip: '删除github项目中已经存在的某个文件...', readcount: 888, pubtime: '2017-11-15 10:25 :30', comucount: 77 },
+            { title: '删除github项目中已经存在的某个文件', status: '新', id: '5', tip: '删除github项目中已经存在的某个文件...', readcount: 777, pubtime: '2017-11-15 10:25 :30', comucount: 66 }
           ]
         }
       },
@@ -283,7 +255,7 @@
     margin-top: 30px;
     float: right;
   }
-  .el-tag{
+  .tip-kind {
     width: 100%;
     text-align: left;
     margin-top: 5px;

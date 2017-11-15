@@ -16,8 +16,12 @@
           <router-link :to="{ name: 'forgetpwd'}"><span class="more-right">忘记密码</span></router-link>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">登录</el-button>
-          <el-button>注册</el-button>
+          <router-link :to="{ name: 'index' }">
+             <el-button type="primary" @click="onSubmit">登录</el-button>
+          </router-link>
+          <router-link :to="{ name: 'register' }">
+            <el-button>注册</el-button>
+          </router-link>
         </el-form-item>
       </el-form>
     </div>

@@ -15,7 +15,9 @@
           <el-input v-model="user.repassword"placeholder="再次输入密码" ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button  @click="onSubmit">注册</el-button>
+          <router-link :to="{ name: 'index' }">
+             <el-button  @click="onSubmit">注册</el-button>
+          </router-link>
         </el-form-item>
       </el-form>
     </div>
