@@ -12,11 +12,11 @@
         <el-menu-item class="mar-lef" index="2">文章</el-menu-item>
         <el-menu-item class="mar-lef" index="3">留言</el-menu-item>
         <div class="login-regist">
-          <div v-if="false">
+          <div v-if="islogin">
           <a href="#">登录</a>
             <span style="margin-left: 20px;"><a href="#">注册</a></span>
            </div>
-          <div v-if="true">
+          <div v-else="islogin">
             <img class="head-img" src="http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"/>
             <span style="float: right;margin-top: 10px;margin-left: 10px;"> <a href="#">苏雨丶</a></span>
           </div>
@@ -29,7 +29,7 @@
   export default {
     data () {
       return {
-        islogin: false
+        islogin: true
       }
     },
     methods: {

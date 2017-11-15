@@ -50,7 +50,8 @@
             <el-tag
               v-for="tag in tags"
               :key="tag.name"
-              :type="tag.type">
+              :type="tag.type"
+              :disable-transitions="true">
               {{tag.name}}
             </el-tag>
           </div>
