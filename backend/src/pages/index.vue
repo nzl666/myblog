@@ -2,6 +2,9 @@
   <div id="" >
     <el-container>
       <el-aside width="200px">
+        <div style="text-align: center;margin-top: 20px;margin-bottom:10px;font-weight: bold;font-size: 22px;color: white">
+          苏雨后台管理
+        </div>
         <div style="background-color:#545c64 ">
           <el-menu
             default-active="2"
@@ -67,28 +70,26 @@
             </div>
             <hr/>
             <div class="write-mark">
-              <el-input
+              <el-input id="textarea"
                 type="textarea"
-                :autosize="{ minRows: 14, maxRows: 14}"
+                :autosize="{ minRows: 12, maxRows: 12}"
                 placeholder="请输入正文"
-                v-model="textarea3">
+                v-model="textarea3" @change="valuechange">
               </el-input>
             </div>
-            <div style="margin-top: 10px;margin-bottom: 10px;background-color: #878d99">
+            <div style="background-color: #878d99;width: 100%;">
               实时更新
             </div>
-            <div class="write-mark" style="overflow:scroll; ">
-               <h1>标题</h1>
-              <h1>标题</h1>
-              <h1>标题</h1>
-              <h1>标题</h1>
+            <div id="preview" class="write-mark" style="overflow:scroll;padding-left: 35px;
+    padding-right: 35px; width: 94%;height: 300px">
+              <p style="color:#d8dce5;text-align: center;font-size: 24px; ">Markdown 实时预览</p>
             </div>
             <div style="margin-top: 10px;">
               <div style="height: 16px;float: left;width: 6px;background-color: orange;margin-top: 4px; margin-right: 6px;"></div>
               <label  style="color: #5a5e66;">文章分类</label>
             </div>
             <hr/>
-            <el-input v-model="input" placeholder="请选择分类" max="80%"></el-input>
+            <el-input v-model="checkList" placeholder="请选择分类"  max="80%"></el-input>
             <el-checkbox-group v-model="checkList">
               <el-checkbox label="Java"></el-checkbox>
               <el-checkbox label="vue"></el-checkbox>
@@ -107,13 +108,21 @@
 </template>
 <script>
   import vleft from '@/pages/left'
+  import $ from 'jquery'
   export default {
-    data() {
+    name: 'HelloWorld',
+    data () {
       return {
-        checkList: ['复选框 A']
-      };
+        checkList: []
+      }
     },
-    methods: {
+    methods:{
+      valuechange: function () {
+        var text = document.getElementById("textarea").value;
+        var converter = new showdown.Converter();
+        var html = converter.makeHtml(text);
+        document.getElementById("preview").innerHTML = html;
+      }
     },
     components: { vleft }
   }
@@ -126,9 +135,19 @@
     margin: 5px;
     padding: 2px;
   }
+  .el-aside {
+    background-color: rgb(84, 92, 100);
+    padding-right: 3px;
+  }
+  .el-menu {
+    border-righ:rgb(84, 92, 100);
+  }
   .write-mark {
     width: 100%;
     border: 2px solid white;
-    height: 300px;
+  }
+  #textarea{
+    font-size: 17px;
+    color: #b4bccc;
   }
 </style>
