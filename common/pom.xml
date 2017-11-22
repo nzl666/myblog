@@ -9,11 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.suyu</groupId>
     <artifactId>common</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
     <modules>
         <module>mybatits</module>
         <module>model</module>
+        <module>websocket</module>
     </modules>
 
 
