@@ -7,11 +7,11 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "element-ui": "^2.0.7",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -58,7 +58,7 @@
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0",
-    "jquery":"^2.2.3"
+    "jquery": "^2.2.3"
   },
   "engines": {
     "node": ">= 4.0.0",
