@@ -124,7 +124,8 @@
           { uid: 2, ctime: '2017-11-15 10:28:35', uname: '苏雨°', headimg: 'http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"', floor: 2 },
           { uid: 3, ctime: '2017-11-15 10:28:35', uname: '苏雨丶', headimg: 'http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"', floor: 3 },
           { uid: 4, ctime: '2017-11-15 10:28:35', uname: '苏雨°', headimg: 'http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"', floor: 4 }
-        ]
+        ],
+        textarea: ''
       }
     },
     components: { vheader }

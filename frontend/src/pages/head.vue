@@ -7,6 +7,7 @@
         @select="handleSelect"
         background-color="#545c64"
         text-color="#fff"
+        :router="true"
         active-text-color="#ffd04b">
         <el-menu-item class="mar-lef" index="/index">首页</el-menu-item>
         <el-menu-item class="mar-lef" index="/blog">文章</el-menu-item>
@@ -24,6 +25,7 @@
           </div>
         </div>
       </el-menu>
+      {{ activeIndex }}
     </div>
 </template>
 
@@ -31,12 +33,14 @@
   export default {
     data () {
       return {
-        islogin: true
+        islogin: false,
+        activeIndex: this.$store.state.index
       }
     },
     methods: {
-      handleSelect (key, keyPath) {
-        console.log(key, keyPath)
+      handleSelect (key) {
+        console.log(key)
+        this.$store.dispatch('changeHead', { index: key })
       }
     }
   }
