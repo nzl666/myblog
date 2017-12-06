@@ -16,9 +16,7 @@
           <router-link :to="{ name: 'forgetpwd'}"><span class="more-right">忘记密码</span></router-link>
         </el-form-item>
         <el-form-item>
-          <router-link :to="{ name: 'index' }">
-             <el-button type="primary" @click="onSubmit">登录</el-button>
-          </router-link>
+             <el-button type="primary" @click="onSubmit(user)">登录</el-button>
           <router-link :to="{ name: 'register' }">
             <el-button>注册</el-button>
           </router-link>
@@ -28,14 +26,38 @@
   </el-col>
 </template>
 
-<script type="text/ecmascript-6">
+<script >
+  import axios from 'axios'
+  import Vue from 'vue'
+
+  Vue.use(axios)
   export default {
     data () {
       return {
         user: {
           account: 'admin',
           password: '123456'
-        }
+        },
+        checked: false
+      }
+    },
+    methods: {
+      onSubmit () {
+        console.log(123)
+//        axios.post('/login/index', {
+//          username: this.user.account,
+//          lastName: this.user.password
+//        })
+//          .then(function (response) {
+//            console.log(response)
+//          })
+//          .catch(function (error) {
+//            console.log(error)
+//          })
+        this.$store.dispatch('login', {
+          username: this.user.account,
+          password: this.user.password
+        })
       }
     }
   }
