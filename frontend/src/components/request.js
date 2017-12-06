@@ -22,18 +22,18 @@ export default {
   post (url, data) {
     return axios({
       method: 'post',
-      baseURI: 'http://localhost:8087',
+      baseURL: 'http://localhost:8087',
       url,
       data: data,
       timeout: 10000,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
+        'token': '123'
       }
     })
       .then(
         (response) => {
-          console.log(response.status)
           return response
         }
       )

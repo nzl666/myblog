@@ -22,8 +22,9 @@ export default new Vuex.Store({
     },
     login (context, user) {
       console.log(user)
-      return request.post('/login/index', user).then((res) => {
-        if (res.data && res.data.status === 20) {
+      return request.post('login/index', user).then((res) => {
+        if (res.data.code === 20) {
+          console.log(res)
           context.commit('login', { istrue: true })
         }
       })

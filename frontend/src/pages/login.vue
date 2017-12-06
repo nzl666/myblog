@@ -27,10 +27,6 @@
 </template>
 
 <script >
-  import axios from 'axios'
-  import Vue from 'vue'
-
-  Vue.use(axios)
   export default {
     data () {
       return {
@@ -43,21 +39,11 @@
     },
     methods: {
       onSubmit () {
-        console.log(123)
-//        axios.post('/login/index', {
-//          username: this.user.account,
-//          lastName: this.user.password
-//        })
-//          .then(function (response) {
-//            console.log(response)
-//          })
-//          .catch(function (error) {
-//            console.log(error)
-//          })
         this.$store.dispatch('login', {
           username: this.user.account,
           password: this.user.password
         })
+        console.log(this.$store.state.islogin)
       }
     }
   }
