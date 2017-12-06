@@ -20,7 +20,7 @@ spring:
          filters: stat, wall,log4j
          #-- end config
          driver-class-name: com.mysql.jdbc.Driver
-         url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
+         url: jdbc:mysql://127.0.0.1:3306/suyu?useUnicode=true&characterEncoding=utf8
          username: root
          password: root
 

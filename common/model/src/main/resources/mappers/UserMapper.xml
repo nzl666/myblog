@@ -307,8 +307,8 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
     <select id="selectByLogin" parameterType="com.suyu.domain.User" resultMap="BaseResultMap">
-        selecr
+        select
           <include refid="Base_Column_List"/>
-        from USER  w
+        from USER  where phone = #{phone,jdbcType=VARCHAR} AND  password = #{password,jdbcType=VARCHAR} AND status = 1
     </select>
 </mapper>
