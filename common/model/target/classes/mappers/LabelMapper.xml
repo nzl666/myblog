@@ -209,4 +209,15 @@
       state = #{state,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectLabelList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from label
+  </select>
+  <select id="selectLabelsAndCount" resultType="com.suyu.entity.LabelCount">
+    select l.id 'lid',l.labelName 'labelname',count(*) 'count'
+    from blog b LEFT JOIN label l
+    on b.lid = l.id group by l.id
+  </select>
 </mapper>

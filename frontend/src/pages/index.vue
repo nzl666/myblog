@@ -115,23 +115,18 @@
         </el-main>
       </el-container>
     </div>
-      {{ islogin }}
+      <p>{{ tags }}123</p>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
     import vheader from '@/pages/head'
+    import request from '@/components/request'
     export default {
       name: 'Test',
       data () {
         return {
-          tags: [
-            { name: '标签一', type: '' },
-            { name: '标签二', type: 'success' },
-            { name: '标签三', type: 'info' },
-            { name: '标签四', type: 'warning' },
-            { name: '标签五', type: 'danger' }
-          ],
+          tags: [],
           blogs: [
             { title: '删除github项目中已经存在的某个文件', status: '新', id: '1', tip: '删除github项目中已经存在的某个文件...', readcount: 666, pubtime: '2017-11-15 10:25 :30', comucount: 99 },
             { title: '删除github项目中已经存在的某个文件', status: '热', id: '2', tip: '删除github项目中已经存在的某个文件...', readcount: 333, pubtime: '2017-11-15 10:25 :30', comucount: 666 },
@@ -143,8 +138,21 @@
           islogin: false
         }
       },
-      computed: {
-
+      created: function () {
+        this.islogin = this.$store.state.islogin
+        if (this.islogin === false) {
+          this.$router.push('/login')
+        }
+        this.tags = this.initLab()
+      },
+      methods: {
+        initLab () {
+          request.post('/label/getlabelsandcount').then((res) => {
+            if (res.data.code === 20) {
+              return res.data.content
+            }
+          })
+        }
       },
       components: { vheader }
     }

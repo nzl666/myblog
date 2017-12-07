@@ -1,27 +1,9 @@
 package com.suyu.domain;
 
-public class UserBlog {
-    private Long uid;
-
-    private Long bid;
-
+public class UserBlog extends UserBlogKey {
     private Byte istop;
 
-    public Long getUid() {
-        return uid;
-    }
-
-    public void setUid(Long uid) {
-        this.uid = uid;
-    }
-
-    public Long getBid() {
-        return bid;
-    }
-
-    public void setBid(Long bid) {
-        this.bid = bid;
-    }
+    private Boolean type;
 
     public Byte getIstop() {
         return istop;
@@ -29,5 +11,13 @@ public class UserBlog {
 
     public void setIstop(Byte istop) {
         this.istop = istop;
+    }
+
+    public Boolean getType() {
+        return type;
+    }
+
+    public void setType(Boolean type) {
+        this.type = type;
     }
 }

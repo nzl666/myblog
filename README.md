@@ -1,21 +1,26 @@
-# frontend
+## API
 
-> A Vue.js project
+#### 登录
 
-## Build Setup
+##### url:http://127.0.0.1:8087/label/getlabels
 
-``` bash
-# install dependencies
-npm install
+##### 所需data
 
-# serve with hot reload at localhost:8080
-npm run dev
+    {
+        phone: '15900610143',
+        password: '123456'
+    }
+    
+#### 标签查询
+     
+##### url:http://127.0.0.1:8087/label/getlabels
 
-# build for production with minification
-npm run build
+##### 所需data
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+    {
+        null
+    }
+    
+#### 标签和文章数
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+##### url:http://127.0.0.1:8087/label/getlabelsandcount  

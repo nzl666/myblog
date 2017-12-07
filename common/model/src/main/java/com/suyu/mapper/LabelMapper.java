@@ -3,8 +3,12 @@ package com.suyu.mapper;
 import com.suyu.domain.Label;
 import com.suyu.domain.LabelExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import com.suyu.entity.LabelCount;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface LabelMapper {
     long countByExample(LabelExample example);
 
@@ -27,4 +31,8 @@ public interface LabelMapper {
     int updateByPrimaryKeySelective(Label record);
 
     int updateByPrimaryKey(Label record);
+
+    List<Label> selectLabelList();
+
+    List<LabelCount> selectLabelsAndCount();
 }

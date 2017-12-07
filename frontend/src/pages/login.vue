@@ -22,6 +22,7 @@
           </router-link>
         </el-form-item>
       </el-form>
+      {{ islogin }}
     </div>
   </el-col>
 </template>
@@ -31,19 +32,22 @@
     data () {
       return {
         user: {
-          account: 'admin',
+          account: '15900610143',
           password: '123456'
         },
-        checked: false
+        checked: false,
+        islogin: this.$store.state.islogin
       }
     },
     methods: {
       onSubmit () {
-        this.$store.dispatch('login', {
+        var result = this.$store.dispatch('login', {
           phone: this.user.account,
           password: this.user.password
         })
-        console.log(this.$store.state.islogin)
+        if (result) {
+          this.$router.push('/index')
+        }
       }
     }
   }

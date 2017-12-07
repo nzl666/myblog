@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import ele from 'element-ui'
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
@@ -34,7 +34,11 @@ export default {
     })
       .then(
         (response) => {
-          return response
+          if (response && (response.status === 200 || response.status === 304 || response.status === 400)) {
+            return response
+            // 如果不需要除了data之外的数据，可以直接 return response.data
+          }
+          ele.Message('网络异常')
         }
       )
   }

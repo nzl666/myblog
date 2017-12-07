@@ -3,8 +3,9 @@
 <mapper namespace="com.suyu.mapper.UserBlogMapper">
   <resultMap id="BaseResultMap" type="com.suyu.domain.UserBlog">
     <id column="uid" jdbcType="BIGINT" property="uid" />
-    <result column="bid" jdbcType="BIGINT" property="bid" />
+    <id column="bid" jdbcType="BIGINT" property="bid" />
     <result column="isTop" jdbcType="TINYINT" property="istop" />
+    <result column="type" jdbcType="BIT" property="type" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uid, bid, isTop
+    uid, bid, isTop, type
   </sql>
   <select id="selectByExample" parameterType="com.suyu.domain.UserBlogExample" resultMap="BaseResultMap">
     select
@@ -82,15 +83,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.suyu.domain.UserBlogKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user_blog
     where uid = #{uid,jdbcType=BIGINT}
+      and bid = #{bid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="com.suyu.domain.UserBlogKey">
     delete from user_blog
     where uid = #{uid,jdbcType=BIGINT}
+      and bid = #{bid,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.suyu.domain.UserBlogExample">
     delete from user_blog
@@ -99,10 +102,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.suyu.domain.UserBlog">
-    insert into user_blog (uid, bid, isTop
-      )
-    values (#{uid,jdbcType=BIGINT}, #{bid,jdbcType=BIGINT}, #{istop,jdbcType=TINYINT}
-      )
+    insert into user_blog (uid, bid, isTop, 
+      type)
+    values (#{uid,jdbcType=BIGINT}, #{bid,jdbcType=BIGINT}, #{istop,jdbcType=TINYINT}, 
+      #{type,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.suyu.domain.UserBlog">
     insert into user_blog
@@ -116,6 +119,9 @@
       <if test="istop != null">
         isTop,
       </if>
+      <if test="type != null">
+        type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -126,6 +132,9 @@
       </if>
       <if test="istop != null">
         #{istop,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -147,6 +156,9 @@
       <if test="record.istop != null">
         isTop = #{record.istop,jdbcType=TINYINT},
       </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -156,7 +168,8 @@
     update user_blog
     set uid = #{record.uid,jdbcType=BIGINT},
       bid = #{record.bid,jdbcType=BIGINT},
-      isTop = #{record.istop,jdbcType=TINYINT}
+      isTop = #{record.istop,jdbcType=TINYINT},
+      type = #{record.type,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -164,19 +177,21 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.suyu.domain.UserBlog">
     update user_blog
     <set>
-      <if test="bid != null">
-        bid = #{bid,jdbcType=BIGINT},
-      </if>
       <if test="istop != null">
         isTop = #{istop,jdbcType=TINYINT},
       </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
     </set>
     where uid = #{uid,jdbcType=BIGINT}
+      and bid = #{bid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.suyu.domain.UserBlog">
     update user_blog
-    set bid = #{bid,jdbcType=BIGINT},
-      isTop = #{istop,jdbcType=TINYINT}
+    set isTop = #{istop,jdbcType=TINYINT},
+      type = #{type,jdbcType=BIT}
     where uid = #{uid,jdbcType=BIGINT}
+      and bid = #{bid,jdbcType=BIGINT}
   </update>
 </mapper>

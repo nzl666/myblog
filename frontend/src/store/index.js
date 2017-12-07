@@ -6,14 +6,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     index: '/index',
-    islogin: false
+    islogin: true
   },
   mutations: {
     changeHead: (state, payload) => {
       state.index = payload.index
     },
     login: (state, payload) => {
-      state.islogin = payload.istrue
+      state.islogin = payload.islogin
     }
   },
   actions: {
@@ -21,11 +21,12 @@ export default new Vuex.Store({
       context.commit('changeHead', { index: payload.index })
     },
     login (context, user) {
-      console.log(user)
       return request.post('login/index', user).then((res) => {
         if (res.data.code === 20) {
-          context.commit('login', { istrue: true })
-          this.$router.push('/index')
+          context.commit('login', { islogin: true })
+          return true
+        } else {
+          return false
         }
       })
     }

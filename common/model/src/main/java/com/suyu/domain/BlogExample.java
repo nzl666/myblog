@@ -235,6 +235,76 @@ public class BlogExample {
             return (Criteria) this;
         }
 
+        public Criteria andResumeIsNull() {
+            addCriterion("resume is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeIsNotNull() {
+            addCriterion("resume is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeEqualTo(String value) {
+            addCriterion("resume =", value, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeNotEqualTo(String value) {
+            addCriterion("resume <>", value, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeGreaterThan(String value) {
+            addCriterion("resume >", value, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeGreaterThanOrEqualTo(String value) {
+            addCriterion("resume >=", value, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeLessThan(String value) {
+            addCriterion("resume <", value, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeLessThanOrEqualTo(String value) {
+            addCriterion("resume <=", value, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeLike(String value) {
+            addCriterion("resume like", value, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeNotLike(String value) {
+            addCriterion("resume not like", value, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeIn(List<String> values) {
+            addCriterion("resume in", values, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeNotIn(List<String> values) {
+            addCriterion("resume not in", values, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeBetween(String value1, String value2) {
+            addCriterion("resume between", value1, value2, "resume");
+            return (Criteria) this;
+        }
+
+        public Criteria andResumeNotBetween(String value1, String value2) {
+            addCriterion("resume not between", value1, value2, "resume");
+            return (Criteria) this;
+        }
+
         public Criteria andLidIsNull() {
             addCriterion("lid is null");
             return (Criteria) this;
@@ -412,6 +482,126 @@ public class BlogExample {
 
         public Criteria andUpdatetimeNotBetween(Date value1, Date value2) {
             addCriterion("updatetime not between", value1, value2, "updatetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountIsNull() {
+            addCriterion("readcount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountIsNotNull() {
+            addCriterion("readcount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountEqualTo(Integer value) {
+            addCriterion("readcount =", value, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountNotEqualTo(Integer value) {
+            addCriterion("readcount <>", value, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountGreaterThan(Integer value) {
+            addCriterion("readcount >", value, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("readcount >=", value, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountLessThan(Integer value) {
+            addCriterion("readcount <", value, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountLessThanOrEqualTo(Integer value) {
+            addCriterion("readcount <=", value, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountIn(List<Integer> values) {
+            addCriterion("readcount in", values, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountNotIn(List<Integer> values) {
+            addCriterion("readcount not in", values, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountBetween(Integer value1, Integer value2) {
+            addCriterion("readcount between", value1, value2, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadcountNotBetween(Integer value1, Integer value2) {
+            addCriterion("readcount not between", value1, value2, "readcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentIsNull() {
+            addCriterion("comment is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentIsNotNull() {
+            addCriterion("comment is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentEqualTo(Integer value) {
+            addCriterion("comment =", value, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNotEqualTo(Integer value) {
+            addCriterion("comment <>", value, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentGreaterThan(Integer value) {
+            addCriterion("comment >", value, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentGreaterThanOrEqualTo(Integer value) {
+            addCriterion("comment >=", value, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentLessThan(Integer value) {
+            addCriterion("comment <", value, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentLessThanOrEqualTo(Integer value) {
+            addCriterion("comment <=", value, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentIn(List<Integer> values) {
+            addCriterion("comment in", values, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNotIn(List<Integer> values) {
+            addCriterion("comment not in", values, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentBetween(Integer value1, Integer value2) {
+            addCriterion("comment between", value1, value2, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNotBetween(Integer value1, Integer value2) {
+            addCriterion("comment not between", value1, value2, "comment");
             return (Criteria) this;
         }
     }

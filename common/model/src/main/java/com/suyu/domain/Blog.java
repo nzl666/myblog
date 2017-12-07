@@ -7,11 +7,17 @@ public class Blog {
 
     private String title;
 
+    private String resume;
+
     private Byte lid;
 
     private Date createtime;
 
     private Date updatetime;
+
+    private Integer readcount;
+
+    private Integer comment;
 
     private String content;
 
@@ -29,6 +35,14 @@ public class Blog {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume == null ? null : resume.trim();
     }
 
     public Byte getLid() {
@@ -53,6 +67,22 @@ public class Blog {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public Integer getReadcount() {
+        return readcount;
+    }
+
+    public void setReadcount(Integer readcount) {
+        this.readcount = readcount;
+    }
+
+    public Integer getComment() {
+        return comment;
+    }
+
+    public void setComment(Integer comment) {
+        this.comment = comment;
     }
 
     public String getContent() {

@@ -2,6 +2,7 @@ package com.suyu.mapper;
 
 import com.suyu.domain.UserBlog;
 import com.suyu.domain.UserBlogExample;
+import com.suyu.domain.UserBlogKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +11,7 @@ public interface UserBlogMapper {
 
     int deleteByExample(UserBlogExample example);
 
-    int deleteByPrimaryKey(Long uid);
+    int deleteByPrimaryKey(UserBlogKey key);
 
     int insert(UserBlog record);
 
@@ -18,7 +19,7 @@ public interface UserBlogMapper {
 
     List<UserBlog> selectByExample(UserBlogExample example);
 
-    UserBlog selectByPrimaryKey(Long uid);
+    UserBlog selectByPrimaryKey(UserBlogKey key);
 
     int updateByExampleSelective(@Param("record") UserBlog record, @Param("example") UserBlogExample example);
 

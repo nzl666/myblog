@@ -4,9 +4,12 @@
   <resultMap id="BaseResultMap" type="com.suyu.domain.Blog">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="resume" jdbcType="VARCHAR" property="resume" />
     <result column="lid" jdbcType="TINYINT" property="lid" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="readcount" jdbcType="INTEGER" property="readcount" />
+    <result column="comment" jdbcType="INTEGER" property="comment" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.suyu.domain.Blog">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -70,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, lid, createTime, updatetime
+    id, title, resume, lid, createTime, updatetime, readcount, comment
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -126,11 +129,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.suyu.domain.Blog">
-    insert into blog (id, title, lid, 
-      createTime, updatetime, content
+    insert into blog (id, title, resume, 
+      lid, createTime, updatetime, 
+      readcount, comment, content
       )
-    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{lid,jdbcType=TINYINT}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{resume,jdbcType=VARCHAR}, 
+      #{lid,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{readcount,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.suyu.domain.Blog">
@@ -142,6 +147,9 @@
       <if test="title != null">
         title,
       </if>
+      <if test="resume != null">
+        resume,
+      </if>
       <if test="lid != null">
         lid,
       </if>
@@ -150,6 +158,12 @@
       </if>
       <if test="updatetime != null">
         updatetime,
+      </if>
+      <if test="readcount != null">
+        readcount,
+      </if>
+      <if test="comment != null">
+        comment,
       </if>
       <if test="content != null">
         content,
@@ -162,6 +176,9 @@
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
+      <if test="resume != null">
+        #{resume,jdbcType=VARCHAR},
+      </if>
       <if test="lid != null">
         #{lid,jdbcType=TINYINT},
       </if>
@@ -170,6 +187,12 @@
       </if>
       <if test="updatetime != null">
         #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readcount != null">
+        #{readcount,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=INTEGER},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -191,6 +214,9 @@
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
       </if>
+      <if test="record.resume != null">
+        resume = #{record.resume,jdbcType=VARCHAR},
+      </if>
       <if test="record.lid != null">
         lid = #{record.lid,jdbcType=TINYINT},
       </if>
@@ -199,6 +225,12 @@
       </if>
       <if test="record.updatetime != null">
         updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.readcount != null">
+        readcount = #{record.readcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=INTEGER},
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
@@ -212,9 +244,12 @@
     update blog
     set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
+      resume = #{record.resume,jdbcType=VARCHAR},
       lid = #{record.lid,jdbcType=TINYINT},
       createTime = #{record.createtime,jdbcType=TIMESTAMP},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      readcount = #{record.readcount,jdbcType=INTEGER},
+      comment = #{record.comment,jdbcType=INTEGER},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -224,9 +259,12 @@
     update blog
     set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
+      resume = #{record.resume,jdbcType=VARCHAR},
       lid = #{record.lid,jdbcType=TINYINT},
       createTime = #{record.createtime,jdbcType=TIMESTAMP},
-      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      readcount = #{record.readcount,jdbcType=INTEGER},
+      comment = #{record.comment,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -237,6 +275,9 @@
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
+      <if test="resume != null">
+        resume = #{resume,jdbcType=VARCHAR},
+      </if>
       <if test="lid != null">
         lid = #{lid,jdbcType=TINYINT},
       </if>
@@ -245,6 +286,12 @@
       </if>
       <if test="updatetime != null">
         updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readcount != null">
+        readcount = #{readcount,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=INTEGER},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
@@ -255,18 +302,24 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.suyu.domain.Blog">
     update blog
     set title = #{title,jdbcType=VARCHAR},
+      resume = #{resume,jdbcType=VARCHAR},
       lid = #{lid,jdbcType=TINYINT},
       createTime = #{createtime,jdbcType=TIMESTAMP},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      readcount = #{readcount,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.suyu.domain.Blog">
     update blog
     set title = #{title,jdbcType=VARCHAR},
+      resume = #{resume,jdbcType=VARCHAR},
       lid = #{lid,jdbcType=TINYINT},
       createTime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      readcount = #{readcount,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

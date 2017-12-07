@@ -13,7 +13,7 @@
         <el-menu-item class="mar-lef" index="/blog">文章</el-menu-item>
         <el-menu-item class="mar-lef" index="3">留言</el-menu-item>
         <div class="login-regist">
-          <div v-if="islogin">
+          <div v-if="!islogin">
             <router-link :to="{ name: 'login' }">登录</router-link>
             <router-link :to="{ name: 'register' }">
             <span style="margin-left: 20px;">注册</span>
@@ -25,7 +25,6 @@
           </div>
         </div>
       </el-menu>
-      {{ activeIndex }}
     </div>
 </template>
 
@@ -39,7 +38,6 @@
     },
     methods: {
       handleSelect (key) {
-        console.log(key)
         this.$store.dispatch('changeHead', { index: key })
       }
     }

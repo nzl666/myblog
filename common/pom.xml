@@ -15,7 +15,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>mybatits</module>
         <module>model</module>
         <module>websocket</module>
     </modules>
