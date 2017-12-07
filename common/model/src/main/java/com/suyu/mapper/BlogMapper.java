@@ -3,8 +3,13 @@ package com.suyu.mapper;
 import com.suyu.domain.Blog;
 import com.suyu.domain.BlogExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import com.suyu.entity.BlogList;
+import com.suyu.entity.BlogMain;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface BlogMapper {
     long countByExample(BlogExample example);
 
@@ -33,4 +38,8 @@ public interface BlogMapper {
     int updateByPrimaryKeyWithBLOBs(Blog record);
 
     int updateByPrimaryKey(Blog record);
+
+    List<BlogList> selectBlogList(BlogMain blogMain);
+
+    Integer selectBlogCount(BlogMain blogMain);
 }

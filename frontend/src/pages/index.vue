@@ -36,7 +36,7 @@
             </el-tag>
           </div>
           <div id="select-art">
-              <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
+              <el-input placeholder="请输入内容" v-model="search" class="input-with-select">
                 <el-button slot="append" icon="el-icon-search"></el-button>
               </el-input>
           </div>
@@ -49,10 +49,11 @@
           <div class="my-info" style="text-align: left;border: none">
             <el-tag class="tip-kind"
               v-for="tag in tags"
-              :key="tag.name"
+              :key="tag.count"
               :type="tag.type"
               :disable-transitions="true">
-              {{tag.name}}
+              {{tag.labelname}}
+              <div style="float: right;margin-bottom: -10px">{{ tag.count }}</div>
             </el-tag>
           </div>
           <div class="center-spance"></div>
@@ -85,14 +86,14 @@
            </div>
           <div class="blog-art-box" v-for="b in blogs">
             <div class="blog-title">
-              <div class="tip-blog">{{b.status}}</div>
+              <div class="tip-blog">{{b.type}}</div>
               <router-link :to="{ name: 'blog' }">{{b.title}}</router-link>
             </div>
-            <div class="blog-introduction"><span class="intro-font">{{b.tip}}</span></div>
+            <div class="blog-introduction"><span class="intro-font">{{b.resume}}</span></div>
             <div class="blog-detail">
                <span class="blog-data-art">
                  <i class="el-icon-edit-outline" style="font-size: 15px"></i>
-                 <label>评论</label><span>(</span><span>{{b.comucount}}</span><span>)</span>
+                 <label>评论</label><span>(</span><span>{{b.comment}}</span><span>)</span>
               </span>
               <span class="blog-data-art">
                 <i class="el-icon-view" style="font-size: 15px;"></i>
@@ -101,7 +102,7 @@
 
               <span class="blog-data-art">
                   <i class="el-icon-time" style="font-size: 15px;"></i>
-                <span>{{b.pubtime}}</span>
+                <span>{{ b.creattime }}</span>
               </span>
             </div>
           </div>
@@ -115,7 +116,6 @@
         </el-main>
       </el-container>
     </div>
-      <p>{{ tags }}123</p>
     </div>
 </template>
 
@@ -127,29 +127,43 @@
       data () {
         return {
           tags: [],
-          blogs: [
-            { title: '删除github项目中已经存在的某个文件', status: '新', id: '1', tip: '删除github项目中已经存在的某个文件...', readcount: 666, pubtime: '2017-11-15 10:25 :30', comucount: 99 },
-            { title: '删除github项目中已经存在的某个文件', status: '热', id: '2', tip: '删除github项目中已经存在的某个文件...', readcount: 333, pubtime: '2017-11-15 10:25 :30', comucount: 666 },
-            { title: '删除github项目中已经存在的某个文件', status: '新', id: '3', tip: '删除github项目中已经存在的某个文件...', readcount: 999, pubtime: '2017-11-15 10:25 :30', comucount: 88 },
-            { title: '删除github项目中已经存在的某个文件', status: '热', id: '4', tip: '删除github项目中已经存在的某个文件...', readcount: 888, pubtime: '2017-11-15 10:25 :30', comucount: 77 },
-            { title: '删除github项目中已经存在的某个文件', status: '新', id: '5', tip: '删除github项目中已经存在的某个文件...', readcount: 777, pubtime: '2017-11-15 10:25 :30', comucount: 66 }
-          ],
-          input5: '123',
+          blogs: [],
+          search: null,
+          pageno: 1,
+          pagesize: 5,
+          currpage: 1,
+          count: 1,
+          pages: 1,
           islogin: false
         }
       },
-      created: function () {
+      created () {
         this.islogin = this.$store.state.islogin
         if (this.islogin === false) {
           this.$router.push('/login')
         }
-        this.tags = this.initLab()
+        this.initLab()
+        this.initBlog()
+      },
+      mounted () {
       },
       methods: {
         initLab () {
           request.post('/label/getlabelsandcount').then((res) => {
             if (res.data.code === 20) {
-              return res.data.content
+              console.log(res.data.content)
+              this.tags = res.data.content
+            }
+          })
+        },
+        initBlog () {
+          request.post('/blog/list').then((res) => {
+            if (res.data.code === 20) {
+              console.log(res.data.content)
+              this.blogs = res.data.content.blogs
+              this.sear.currpage = res.data.content.currpage
+              this.sear.pages = res.data.content.pages
+              this.sear.count = res.data.content.count
             }
           })
         }

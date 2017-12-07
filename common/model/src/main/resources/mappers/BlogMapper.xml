@@ -322,4 +322,28 @@
       comment = #{comment,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectBlogList" parameterType="com.suyu.entity.BlogMain" resultType="com.suyu.entity.BlogList">
+      select b.id 'id',b.title 'title',b.resume 'resume',b.content 'content',
+          b.createTime 'creattime',
+          b.readcount 'readcount',b.`comment` 'comment',u.type 'type'
+           from blog b left join user_blog u on b.id = u.bid
+           where 1=1
+      <if test="search != null">
+        AND  b.title like  CONCAT('%',#{search},'%')
+        OR   b.content like  CONCAT('%',#{search},'%')
+        OR   b.resume like  CONCAT('%',#{search},'%')
+      </if>
+    ORDER BY b.createTime DESC
+    limit #{begin},#{pagesize}
+  </select>
+  <select id="selectBlogCount" parameterType="com.suyu.entity.BlogMain" resultType="java.lang.Integer">
+    select count(*)
+    from blog b left join user_blog u on b.id = u.bid
+    where 1=1
+    <if test="search != null">
+      AND  b.title like  CONCAT('%',#{search},'%')
+      OR   b.content like  CONCAT('%',#{search},'%')
+      OR   b.resume like  CONCAT('%',#{search},'%')
+    </if>
+  </select>
 </mapper>
