@@ -40,7 +40,7 @@
     methods: {
       onSubmit () {
         this.$store.dispatch('login', {
-          username: this.user.account,
+          phone: this.user.account,
           password: this.user.password
         })
         console.log(this.$store.state.islogin)

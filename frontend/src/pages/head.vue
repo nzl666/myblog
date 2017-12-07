@@ -33,7 +33,7 @@
   export default {
     data () {
       return {
-        islogin: false,
+        islogin: this.$store.state.islogin,
         activeIndex: this.$store.state.index
       }
     },

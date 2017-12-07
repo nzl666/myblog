@@ -115,6 +115,7 @@
         </el-main>
       </el-container>
     </div>
+      {{ islogin }}
     </div>
 </template>
 
@@ -138,8 +139,12 @@
             { title: '删除github项目中已经存在的某个文件', status: '热', id: '4', tip: '删除github项目中已经存在的某个文件...', readcount: 888, pubtime: '2017-11-15 10:25 :30', comucount: 77 },
             { title: '删除github项目中已经存在的某个文件', status: '新', id: '5', tip: '删除github项目中已经存在的某个文件...', readcount: 777, pubtime: '2017-11-15 10:25 :30', comucount: 66 }
           ],
-          input5: '123'
+          input5: '123',
+          islogin: false
         }
+      },
+      computed: {
+
       },
       components: { vheader }
     }

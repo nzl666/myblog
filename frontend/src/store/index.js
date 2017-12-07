@@ -24,8 +24,8 @@ export default new Vuex.Store({
       console.log(user)
       return request.post('login/index', user).then((res) => {
         if (res.data.code === 20) {
-          console.log(res)
           context.commit('login', { istrue: true })
+          this.$router.push('/index')
         }
       })
     }
