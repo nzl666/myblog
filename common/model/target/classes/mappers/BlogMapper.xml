@@ -333,6 +333,9 @@
         OR   b.content like  CONCAT('%',#{search},'%')
         OR   b.resume like  CONCAT('%',#{search},'%')
       </if>
+      <if test="lid != 0">
+        AND  lid = #{ lid }
+      </if>
     ORDER BY b.createTime DESC
     limit #{begin},#{pagesize}
   </select>
@@ -345,5 +348,14 @@
       OR   b.content like  CONCAT('%',#{search},'%')
       OR   b.resume like  CONCAT('%',#{search},'%')
     </if>
+    <if test="lid != 0">
+       AND  lid = #{ lid }
+    </if>
+  </select>
+  <select id="selectReadOrder" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List"/>
+    from blog order by readcount desc
+    limit 0,6
   </select>
 </mapper>

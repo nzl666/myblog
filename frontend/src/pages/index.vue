@@ -12,21 +12,21 @@
           </div>
           <div class="my-info">
             <el-tag id="headimg">
-              <img id="myimg" src="http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"/>
+              <img id="myimg" :src="lefttop.user.headimage"/>
             </el-tag>
             <div style="margin-top: 10px;">
-                <span style="text-align: center;">苏雨丶</span>
+                <span style="text-align: center;">{{ lefttop.user.username }}</span>
             </div>
           </div>
           <div class="my-info" style="text-align: left">
             <div class="art-data">
-              <label>文章：</label><span>66</span>
+              <label>文章：</label><span>{{ lefttop.blogcount }}</span>
             </div>
             <div class="art-data">
-               <label>访问：</label><span>886</span>
+               <label>访问：</label><span>{{ lefttop.visitcount }}</span>
             </div>
             <div class="art-data">
-               <label>评论：</label><span>66</span>
+               <label>评论：</label><span>{{ lefttop.comments }}</span>
             </div>
           </div>
           <div class="center-spance"></div>
@@ -36,7 +36,7 @@
             </el-tag>
           </div>
           <div id="select-art">
-              <el-input placeholder="请输入内容" v-model="search" class="input-with-select">
+              <el-input placeholder="请输入内容" v-model="select.search" class="input-with-select">
                 <el-button slot="append" icon="el-icon-search"></el-button>
               </el-input>
           </div>
@@ -47,14 +47,16 @@
             </el-tag>
           </div>
           <div class="my-info" style="text-align: left;border: none">
-            <el-tag class="tip-kind"
-              v-for="tag in tags"
-              :key="tag.count"
-              :type="tag.type"
-              :disable-transitions="true">
-              {{tag.labelname}}
-              <div style="float: right;margin-bottom: -10px">{{ tag.count }}</div>
-            </el-tag>
+            <div  v-for="(tag, index) in tags" @click="selectkind(tag.lid)" :tid="tag.lid" @mouseover="changestyle()">
+              <el-tag class="tip-kind"
+                      :key="tag.count"
+                      :type="tarcolor[index]"
+                      :disable-transitions="true"
+              >
+                {{tag.labelname}}
+                <div style="float: right;margin-bottom: -10px">{{ tag.count }}</div>
+              </el-tag>
+            </div>
           </div>
           <div class="center-spance"></div>
           <div>
@@ -63,14 +65,8 @@
             </el-tag>
           </div>
           <div class="my-info" style="text-align: left;border: none;padding-right: 0px;">
-            <div class="art-data">
-              <a href="#">H5 Canvas移动端的自定已化</a><span class="top-read">(<span>26666</span>)</span>
-            </div>
-            <div class="art-data">
-              <a href="#">H5 Canvas移动端的自定义花</a><span class="top-read">(<span>86</span>)</span>
-            </div>
-            <div class="art-data">
-              <a href="#">H5 Canvas移动端的自定义花</a><span class="top-read">(<span>66</span>)</span>
+            <div class="art-data" v-for="blog in blogord">
+              <a href="#">{{blog.title}}</a><span class="top-read">(<span>{{blog.readcount}}</span>)</span>
             </div>
           </div>
           <div class="center-spance" style="background-color: #f4f4f4;height: 200px;"></div>
@@ -86,7 +82,7 @@
            </div>
           <div class="blog-art-box" v-for="b in blogs">
             <div class="blog-title">
-              <div class="tip-blog">{{b.type}}</div>
+              <div class="tip-blog">{{type[b.type]}}</div>
               <router-link :to="{ name: 'blog' }">{{b.title}}</router-link>
             </div>
             <div class="blog-introduction"><span class="intro-font">{{b.resume}}</span></div>
@@ -102,15 +98,21 @@
 
               <span class="blog-data-art">
                   <i class="el-icon-time" style="font-size: 15px;"></i>
-                <span>{{ b.creattime }}</span>
+                <span>{{ b.creattime | time}}</span>
               </span>
             </div>
           </div>
          <!--分页-->
           <div class="block">
             <el-pagination
-              layout="prev, pager, next"
-              :total="50">
+              layout="total, prev, pager, next"
+              :total="count"
+              :page-sizes="[2,5,6]"
+              :page-size="select.pagesize"
+              :current-page.sync="select.pageno"
+              @current-change="changePage()"
+              @size-change="changePage()"
+            >
             </el-pagination>
           </div>
         </el-main>
@@ -127,14 +129,49 @@
       data () {
         return {
           tags: [],
+          type: {
+            0: '新',
+            1: '热'
+          },
+          select: {
+            search: null,
+            pageno: 1,
+            pagesize: 5,
+            lid: null
+          },
+          lefttop: {
+            blogcount: 0,
+            comments: 0,
+            user: {
+              headimage: '',
+              id: '',
+              username: ''
+            },
+            visitcount: ''
+          },
           blogs: [],
-          search: null,
-          pageno: 1,
-          pagesize: 5,
+          blogord: [],
           currpage: 1,
           count: 1,
           pages: 1,
-          islogin: false
+          islogin: false,
+          tarcolor: {
+            0: 'success',
+            1: 'info',
+            2: 'warning',
+            3: 'danger',
+            4: '',
+            5: 'success',
+            6: 'info',
+            7: 'warning',
+            8: 'danger',
+            9: '',
+            10: 'success',
+            11: 'info',
+            12: 'warning',
+            13: 'danger',
+            14: ''
+          }
         }
       },
       created () {
@@ -142,12 +179,18 @@
         if (this.islogin === false) {
           this.$router.push('/login')
         }
+        this.open()
         this.initLab()
         this.initBlog()
+        this.initOrder()
+        this.initLeftTop()
       },
       mounted () {
       },
       methods: {
+        open () {
+          this.$message('登录成功')
+        },
         initLab () {
           request.post('/label/getlabelsandcount').then((res) => {
             if (res.data.code === 20) {
@@ -157,15 +200,43 @@
           })
         },
         initBlog () {
-          request.post('/blog/list').then((res) => {
+          request.post('/blog/list', this.select).then((res) => {
             if (res.data.code === 20) {
-              console.log(res.data.content)
               this.blogs = res.data.content.blogs
-              this.sear.currpage = res.data.content.currpage
-              this.sear.pages = res.data.content.pages
-              this.sear.count = res.data.content.count
+              this.currpage = res.data.content.currpage
+              this.pages = res.data.content.pages
+              this.count = res.data.content.count
             }
           })
+        },
+        initOrder () {
+          request.post('/blog/readorder').then((res) => {
+            if (res.data.code === 20) {
+              console.log(res.data.content)
+              this.blogord = res.data.content
+            }
+          })
+        },
+        changePage () {
+          console.log(this.select.pageno)
+          console.log(this.select.pagesize)
+          this.initBlog()
+        },
+        initLeftTop () {
+          request.post('/user/blogleft', {id: 1}).then((res) => {
+            if (res.data.code === 20) {
+              console.log(res.data.content)
+              this.lefttop = res.data.content
+            }
+          })
+        },
+        selectkind (lid) {
+          this.select.pageno = 1
+          this.select.lid = lid
+          this.initBlog()
+        },
+        changestyle () {
+          console.log(110)
         }
       },
       components: { vheader }
@@ -211,8 +282,8 @@
   }
   .art-data{
     font-size: 12px;
-    padding-bottom: 7px;
-    padding-top: 7px;
+    padding-bottom: 5px;
+    padding-top: 5px;
   }
 .top-read{
   float: right;
@@ -268,6 +339,7 @@
     float: left;
     color:white;
     padding-top: 2px;
+    margin-right: 10px;
   }
   .blog-detail{
     width: 100%;
@@ -286,7 +358,10 @@
   .tip-kind {
     width: 100%;
     text-align: left;
-    margin-top: 5px;
+    margin-top: 2px;
     cursor: pointer;
+  }
+  .el-pager li.active {
+    color: #67c23a;
   }
 </style>

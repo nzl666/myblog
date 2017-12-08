@@ -26,8 +26,14 @@ public class BlogMain {
      * 总记录
      */
     private int count;
-
+    /**
+     * 分页开始序号
+     */
     private int begin;
+    /**
+     * 标签id
+     */
+    private int lid;
 
     /**
      * 返回总页数
@@ -87,5 +93,13 @@ public class BlogMain {
 
     public void setBegin(int begin) {
         this.begin = begin;
+    }
+
+    public int getLid() {
+        return lid;
+    }
+
+    public void setLid(int lid) {
+        this.lid = lid;
     }
 }

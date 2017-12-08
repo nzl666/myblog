@@ -1,6 +1,7 @@
 package com.suyu.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.suyu.domain.Blog;
 import com.suyu.entity.BlogMain;
 import com.suyu.entity.InfoCode;
 import com.suyu.entity.ResInfo;
@@ -24,11 +25,7 @@ public class BlogController {
      * @return
      */
     @RequestMapping(value = "list")
-    public String list() {
-        BlogMain blogMain = new BlogMain();
-        blogMain.setSearch("j");
-        blogMain.setPageno(1);
-        blogMain.setPagesize(5);
+    public String list(@RequestBody BlogMain blogMain) {
         ResInfo resInfo = new ResInfo();
         Map<String,Object> map = new HashMap<String,Object>();
         List<BlogMain> blogList = blogService.selectBlogList(blogMain);
@@ -40,6 +37,25 @@ public class BlogController {
         map.put("pages",count%blogMain.getPagesize()==0? count/blogMain.getPagesize() : count/blogMain.getPagesize()+1);
         resInfo.setContent(map);
         resInfo.setCode(InfoCode.SUCCESS);
+        return JSON.toJSONString(resInfo);
+    }
+
+    /**
+     * 首页阅读排行榜
+     * @return
+     */
+    @RequestMapping(value = "readorder")
+    public String readorder() {
+        ResInfo resInfo = new ResInfo();
+        List<Blog> blogs = blogService.selectReadOrder();
+        if(blogs.size() > 0) {
+            resInfo.setCode(InfoCode.SUCCESS);
+            resInfo.setContent(blogs);
+            resInfo.setMessage("数据如下");
+        } else {
+            resInfo.setCode(InfoCode.SUCCESS);
+            resInfo.setMessage("没有数据大哥");
+        }
         return JSON.toJSONString(resInfo);
     }
 }

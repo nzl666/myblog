@@ -6,6 +6,12 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
+import moment from 'moment'
+
+Vue.filter('time', function (value, formatString) {
+  formatString = formatString || 'YYYY-MM-DD HH:mm'
+  return moment(value).format(formatString)
+})
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)

@@ -20,7 +20,7 @@
             </router-link>
            </div>
           <div v-else="islogin">
-            <img class="head-img" src="http://avatar.csdn.net/E/4/A/1_qq_38082304.jpg"/>
+            <img class="head-img" src="http://huluwa-pdf.oss-cn-qingdao.aliyuncs.com/person/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20171208103122.jpg"/>
             <span style="float: right;margin-top: 10px;margin-left: 10px;"> <a href="#">苏雨丶</a></span>
           </div>
         </div>

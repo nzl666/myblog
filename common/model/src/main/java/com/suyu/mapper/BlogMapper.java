@@ -3,7 +3,6 @@ package com.suyu.mapper;
 import com.suyu.domain.Blog;
 import com.suyu.domain.BlogExample;
 import java.util.List;
-
 import com.suyu.entity.BlogList;
 import com.suyu.entity.BlogMain;
 import org.apache.ibatis.annotations.Param;
@@ -42,4 +41,6 @@ public interface BlogMapper {
     List<BlogList> selectBlogList(BlogMain blogMain);
 
     Integer selectBlogCount(BlogMain blogMain);
+
+    List<Blog> selectReadOrder();
 }

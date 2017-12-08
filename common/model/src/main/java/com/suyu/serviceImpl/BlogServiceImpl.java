@@ -34,4 +34,9 @@ public class BlogServiceImpl implements BlogService {
     public int updateByPrimaryKeySelective(Blog record) {
         return blogMapper.updateByPrimaryKeySelective(record);
     }
+
+    @Override
+    public List<Blog> selectReadOrder() {
+        return blogMapper.selectReadOrder();
+    }
 }

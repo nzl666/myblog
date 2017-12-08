@@ -60,3 +60,28 @@
             ],
             "count": 4
         }        
+
+##### 首页博客阅读排行
+
+##### url:http://127.0.0.1:8087/blog/readorder
+
+##### 所需data
+
+    {
+        null
+    }        
+
+##### 返回值
+
+    {      
+        "comment": 99,
+        "createtime": 1512615321000,
+        "id": 5,
+        "lid": 5,
+        "readcount": 66666,
+        "resume": "document.getelementbyid(1)",
+        "title": "js  document",
+        "updatetime": 1512615323000
+    }
+
+    

@@ -13,4 +13,6 @@ public interface BlogService {
     Blog selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Blog record);
+
+    List<Blog> selectReadOrder();
 }
