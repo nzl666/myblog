@@ -9,8 +9,6 @@
           <el-menu
             default-active="2"
             class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b">
@@ -52,7 +50,7 @@
             <div style="height: 16px;float: left;width: 6px;background-color: orange;margin-top: 4px; margin-right: 6px;"></div>
             <label style="color: #5a5e66;">标题</label>
             <hr/>
-            <el-input v-model="input" placeholder="请输入文章标题" max="80%"></el-input>
+            <el-input v-model="blog.title" placeholder="请输入文章标题" max="80%"></el-input>
             <div style="margin-top: 10px;">
               <div style="height: 16px;float: left;width: 6px;background-color: orange;margin-top: 4px; margin-right: 6px;"></div>
               <label style="color: #5a5e66;">摘要</label>
@@ -62,7 +60,7 @@
               type="textarea"
               :autosize="{ minRows: 3, maxRows: 3}"
               placeholder="请输入内容"
-              v-model="textarea3">
+              v-model="blog.resume">
             </el-input>
             <div style="margin-top: 10px;">
               <div style="height: 16px;float: left;width: 6px;background-color: orange;margin-top: 4px; margin-right: 6px;"></div>
@@ -74,7 +72,7 @@
                 type="textarea"
                 :autosize="{ minRows: 12, maxRows: 12}"
                 placeholder="请输入正文"
-                v-model="textarea3" @change="valuechange">
+                 @input="valuechange">
               </el-input>
             </div>
             <div style="background-color: #878d99;width: 100%;">
@@ -89,17 +87,14 @@
               <label  style="color: #5a5e66;">文章分类</label>
             </div>
             <hr/>
-            <el-input v-model="checkList" placeholder="请选择分类"  max="80%"></el-input>
-            <el-checkbox-group v-model="checkList">
-              <el-checkbox label="Java"></el-checkbox>
-              <el-checkbox label="vue"></el-checkbox>
-              <el-checkbox label="git"></el-checkbox>
+            <!--<el-input v-model="checkList" placeholder="请选择分类"  max="80%"></el-input>-->
+            <el-checkbox-group v-model="types">
+              <el-checkbox v-for="l in checkList" label="{{ l.id }}">{{ l.labelname }}</el-checkbox>
             </el-checkbox-group>
             <div style="margin: 20px 0;text-align: center">
-              <el-button type="primary">立即发布</el-button>
+              <el-button type="primary" @click="pubBlog()">立即发布</el-button>
               <el-button type="warning">保存草稿</el-button>
             </div>
-
           </div>
         </div>
       </el-main>
@@ -109,19 +104,41 @@
 <script>
   import vleft from '@/pages/left'
   import $ from 'jquery'
+  import request from "../components/request";
   export default {
     name: 'HelloWorld',
     data () {
       return {
-        checkList: []
+        checkList: [],
+        blog: {
+          title: '',
+          resume: '',
+          content: '',
+          types: []
+        }
       }
     },
-    methods:{
-      valuechange: function () {
-        var text = document.getElementById("textarea").value;
-        var converter = new showdown.Converter();
-        var html = converter.makeHtml(text);
-        document.getElementById("preview").innerHTML = html;
+    created () {
+      this.initTags()
+    },
+    methods: {
+      valuechange (){
+        var text = document.getElementById('textarea').value
+        var converter = new showdown.Converter()
+        this.blog.content = converter.makeHtml(text)
+        document.getElementById('preview').innerHTML = this.blog.content
+      },
+      pubBlog () {
+        console.log(123)
+        request.post('/blog/pub', this.blog).then((res) => {
+          console.log(res.data)
+        })
+      },
+      initTags () {
+        request.post('/label/getlabels').then((res) => {
+          this.checkList = res.data.content
+          console.log(this.checkList)
+        })
       }
     },
     components: { vleft }

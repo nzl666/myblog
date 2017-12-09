@@ -3,6 +3,7 @@ package com.suyu.controller;
 import com.alibaba.fastjson.JSON;
 import com.suyu.domain.Blog;
 import com.suyu.entity.BlogMain;
+import com.suyu.entity.BlogPublic;
 import com.suyu.entity.InfoCode;
 import com.suyu.entity.ResInfo;
 import com.suyu.service.BlogService;
@@ -56,6 +57,15 @@ public class BlogController {
             resInfo.setCode(InfoCode.SUCCESS);
             resInfo.setMessage("没有数据大哥");
         }
+        return JSON.toJSONString(resInfo);
+    }
+    @RequestMapping(value = "pub")
+    public String addBlog(@RequestBody BlogPublic blogPublic) {
+        System.out.println(blogPublic);
+        ResInfo resInfo = new ResInfo();
+        resInfo.setMessage("hhaah");
+        resInfo.setContent("123");
+        resInfo.setCode(InfoCode.SUCCESS);
         return JSON.toJSONString(resInfo);
     }
 }
